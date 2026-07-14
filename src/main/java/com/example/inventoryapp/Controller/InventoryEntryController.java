@@ -20,13 +20,6 @@ import java.time.LocalDate;
 public class InventoryEntryController {
 
     private final InventoryEntryService inventoryReportService;
-
-
-
-    /**
-     * Returns a paginated view of a store's active inventory items for a given business date,
-     * combined with that day's counted quantities.
-     */
     @GetMapping
     public ResponseEntity<PagedResponse<InventoryEntryRow>> getStoreInventory(
             @PathVariable Long storeId,
@@ -43,6 +36,13 @@ public class InventoryEntryController {
         return ResponseEntity.ok(response);
     }
 
+
+    /**
+     * Returns a paginated view of a store's active inventory items for a given business date,
+     * combined with that day's counted quantities.
+     */
+
+
     @PostMapping("/batch")
     public ResponseEntity<Void> submitInventoryBatch(
             @PathVariable Long storeId,
@@ -57,5 +57,8 @@ public class InventoryEntryController {
         inventoryReportService.submitInventoryBatch(request);
         return ResponseEntity.ok().build();
     }
-
+    @GetMapping("/ping")
+    public String ping() {
+        return "OK";
+    }
 }
